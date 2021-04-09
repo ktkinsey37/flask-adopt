@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+			{{message}}
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+
+<form id="pet-add-form" method="POST">
+    {{ form.hidden_tag() }}
+  
+    {% for field in form
+           if field.widget.input_type != 'hidden' %}
+  
+      <p>
+        {{ field.label }}
+        {{field(class_="form_control")}}
+  
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      </p>
+  
+    {% endfor %}
+  
+    <button class="btn btn-primary col-4" type="submit">Submit</button>
+  </form>
+  <br>
+  <form action="/" method="GET">
+    <button class="btn btn-primary col-4">Return to Pets</button>
+</form>
+</div>
+{% endblock %}

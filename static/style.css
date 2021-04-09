@@ -1,0 +1,13 @@
+.container {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border: 3px solid orangered;
+    padding: 10px;
+  }
+
+html body {
+  color: orangered;
+  background: teal;
+}

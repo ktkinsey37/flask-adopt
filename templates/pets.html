@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+{% for pet in pets %}
+
+    <img style='max-width: 200px; max-height: 200px' src="{{pet.photo_url}}">
+    <a href="/{{pet.id}}" method="GET">
+    {{ pet.name}} {% if pet.available == True %}
+        is AVAILABLE!
+    {% endif %}
+    </a>
+    <br>
+    <br>
+    {% endfor %}
+
+    <form action="/add" method="GET">
+        <button class="btn btn-primary col-4">Add a New Pet</button>
+    </form>
+    <br>
+
+</div>
+
+
+
+
+{% endblock %}

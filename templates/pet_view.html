@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+{{ pet.name}} the {{pet.species}} ({{pet.age}} years old)
+<br>
+{% if pet.available==True %}
+is available for adoption
+{% endif %}
+<br>
+<br>
+<img style='max-width: 400px; max-height: 400px' src="{{pet.photo_url}}">
+<br>
+<br>
+{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+			{{message}}
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+
+<form id="pet-edit-form" method="POST">
+    {{ form.hidden_tag() }}
+  
+    {% for field in form
+           if field.widget.input_type != 'hidden' %}
+  
+      <div class="form-group">
+        {{ field.label }}
+        {{field(class_="form_control")}}
+  
+        {% for error in field.errors %}
+          {{ error }}
+        {% endfor %}
+      </div>
+  
+    {% endfor %}
+  
+    <button class="btn btn-primary col-4" type="submit">Submit</button>
+  </form>
+  <br>
+  <form action="/{{pet.id}}/delete col" method="POST">
+    <button class="btn btn-primary col-4">Delete Pet</button>
+  </form>
+  <br>
+  <form action="/" method="GET">
+    <button class="btn btn-primary col-4">Return to Pets</button>
+  </form>
+
+
+</div>
+{% endblock %}
